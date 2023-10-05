@@ -1,0 +1,253 @@
+import React from "react";
+import bg from "./images/muathu.jpg";
+import logo from "./images/Logo.png";
+// import { Autocomplete } from "@react-google-maps/api";
+import {
+  Box,
+  InputBase,
+  TextField,
+  Typography, 
+  useMediaQuery,
+  // IconButton,
+} from "@mui/material";
+
+const App = ({ onLoad, onPlaceChanged }) => {
+  let isMedium = useMediaQuery("(max-width:900px)");
+  let isMobile = useMediaQuery("(max-width:750px)");
+
+  const styles = {
+    banner: {
+      background: `url(${bg}) center center/cover no-repeat`,
+      height: "100vh",
+      width: "100%",
+      opacity: 1,
+      zIndex: -1,
+      position: "absolute",
+      top: 0,
+      left: 0,
+      "&:after": {
+        content: '""',
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        backgroundImage: "linear-gradient(rgb(0,0,0,0.8), rgb(0,0,0,0.3))",
+
+        opacity: 0.7,
+        zIndex: -10,
+      },
+    },
+
+    tabs: {
+      color: "white",
+      display: "flex",
+      justifyContent: "center",
+      gap: "5rem",
+      width: "100vw",
+      ...(isMedium && {
+        position: "absolute",
+        top: "10rem",
+        left: "5rem",
+      }),
+      ...(isMobile && {
+        display: "none",
+      }),
+    },
+    searchFields: {
+      backgroundColor: "white",
+      height: "65px",
+      borderRadius: "100rem",
+      display: "flex",
+      justifyContent: "space-evenly",
+      alignItems: "center",
+      paddingLeft: "30px",
+      width: "45rem",
+
+      ...(isMedium && {
+        position: "absolute",
+        top: "15rem",
+
+        width: "80vw",
+      }),
+      ...(isMobile && {
+        position: "absolute",
+        top: "10rem",
+        p: 1,
+        width: "70vw",
+        flexDirection: "column",
+        height: "45vh",
+        borderRadius: "1rem",
+      }),
+    },
+    inputs: {
+      fontSize: "12px",
+      fontWeight: "bold",
+      mt: "10px",
+      width: "10rem",
+      ...(isMobile && {
+        width: "80%",
+      }),
+    },
+
+    vl: {
+      position: "relative",
+      top: "15",
+      height: "20%",
+      backgroundColor: "rgb(228, 228, 228)",
+      width: "1.5px",
+      marginRight: "20px",
+      paddingBottom: "15px",
+    },
+    hl: {
+      position: "relative",
+      top: "20px",
+
+      backgroundColor: "rgb(228, 228, 228)",
+      width: "100%",
+      mt: "-2rem",
+      mb: "1rem",
+      paddingBottom: "1px",
+    },
+  };
+
+  return (
+    <Box sx={styles.banner}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          p: "2rem",
+          ...(isMedium && {
+            p: "1rem",
+          }),
+        }}
+      >
+        <Box>
+          <img
+            style={{ width: "10vw", marginRight: "1rem" }}
+            src={isMedium ? logo : logo}
+            alt="logo"
+          />
+        </Box>
+
+        <Box sx={styles.tabs}>
+          {/* <Typography
+            variant="subtitle1"
+            sx={{ pb: "5px", borderBottom: "2px solid white" }}
+          >
+            Places To Stay
+          </Typography> */}
+          <Typography variant="subtitle1">Home</Typography>
+          <Typography variant="subtitle1">Chat AI</Typography>
+          <Typography variant="subtitle1">Blog</Typography>
+          <Typography variant="subtitle1">Contact</Typography>
+
+        </Box>
+      </Box>
+      <Box display="flex" justifyContent="center">
+        <Box sx={styles.searchFields}>
+          <Box
+            style={{
+              marginTop: "-5px",
+              fontSize: "12px",
+              fontWeight: "bold",
+              display: "flex",
+              flexDirection: "column",
+              ...(isMobile && {
+                width: "80%",
+              }),
+            }}
+          >
+            <Box sx={styles.inputs}>
+              Location
+              
+            </Box>
+          </Box>
+          <Box sx={isMobile ? styles.hl : styles.vl} />
+
+          <Box sx={styles.inputs}>
+            Check In
+            <TextField
+              variant="standard"
+              type="date"
+              fullWidth
+              InputProps={{ disableUnderline: true }}
+              onChange={(e) => {
+              }}
+            />
+          </Box>
+          <Box sx={isMobile ? styles.hl : styles.vl} />
+          <Box sx={styles.inputs}>
+            Check Out
+            <TextField
+              id="outlined-basic"
+              type="date"
+              fullWidth
+              variant="standard"
+              InputProps={{ disableUnderline: true }}
+              onChange={(e) => {
+              }}
+            />
+          </Box>
+
+          <Box sx={isMobile ? styles.hl : styles.vl} />
+          <Box sx={styles.inputs}>
+            Guests
+            {isMobile && <br />}
+            <InputBase
+              defaultValue={2}
+              type="number"
+              fullWidth
+              inputProps={{ min: 1 }}
+              // onChange={(e) => }
+            />
+          </Box>
+
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              backgroundColor: "#EB4E5F",
+              padding: "5px",
+              borderRadius: "60%",
+              marginRight: "5px",
+              ...(isMobile && {
+                width: "60vw",
+                borderRadius: "0.5rem",
+                justifyContent: "center",
+
+                cursor: "pointer",
+              }),
+            }}
+          >
+          </Box>
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          color: "white",
+          mt: "35vh",
+          ml: "10vw",
+          width: "20rem",
+          ...(isMobile && {
+            width: "10rem",
+            mt: "65vh",
+            ml: "2rem",
+          }),
+        }}
+      >
+        {/* <Typography variant={isMobile ? "h6" : "h4"}>
+          Feel Adventurous
+        </Typography>
+        <Typography variant={isMobile ? "subtitile1" : "body1"}>
+          Let us decide and discover new places to stay, live, work or just
+          relax.
+        </Typography> */}
+      </Box>
+    </Box>
+  );
+};
+
+export default App;
